@@ -5,6 +5,11 @@
     src: url('../fonts/Albus.ttf') format('truetype');
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+
 .header{
     display: flex;
     justify-content: space-between;
@@ -19,7 +24,7 @@
 .logo-img{
     height: auto;
     width: 50px;
-    margin-left: 9px;
+    padding-left: 15px;
 }
 
 .logo-github-link{
@@ -30,7 +35,22 @@
     font-family: 'Albus', sans-serif;
     font-size: 20px;
     color: rgb(96, 55, 55);
+    margin-left: 5px;
+    padding-bottom: 10px;
+    margin-top: 16px;
 }
 
+.head-list{
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    padding-right: 40px;
+}
 
+.header-li{
+    font-family: 'Albus', sans-serif;
+    font-size: 20px;
+}
 
