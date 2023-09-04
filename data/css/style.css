@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Albus';
-    src: url(data/fonts/Albus.ttf) format('truetype');
+    src: url('../fonts/Albus.ttf') format('truetype');
 }
 
 .header{
@@ -12,26 +12,25 @@
 
 .logo{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 .logo-img{
     height: auto;
     width: 50px;
+    margin-left: 9px;
 }
 
 .logo-github-link{
     text-decoration: none;
 }
 
-.logo-text-pink{
+.logo-text{
     font-family: 'Albus', sans-serif;
-    font-weight: bold;
+    font-size: 20px;
+    color: rgb(96, 55, 55);
 }
 
-.logo-text-white{
-    font-family: 'Albus', sans-serif;
-}
 
 
