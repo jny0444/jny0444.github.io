@@ -1,0 +1,37 @@
+/* STYLE.CSS */
+
+@font-face {
+    font-family: 'Albus';
+    src: url(data/fonts/Albus.ttf) format('truetype');
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img{
+    height: auto;
+    width: 50px;
+}
+
+.logo-github-link{
+    text-decoration: none;
+}
+
+.logo-text-pink{
+    font-family: 'Albus', sans-serif;
+    font-weight: bold;
+}
+
+.logo-text-white{
+    font-family: 'Albus', sans-serif;
+}
+
+
