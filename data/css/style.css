@@ -53,8 +53,16 @@ a{
     padding-right: 40px;
 }
 
-.header-li{
+.header-button{
     font-family: 'Albus', sans-serif;
     font-size: 20px;
+    border: none;
+    transition: 0.15s;
+    background-color: rgba(255, 255, 0, 0);
 }
 
+.header-button:hover{
+    color: rgb(97, 95, 69);
+    background-color: rgba(255, 255, 0, 0);
+    cursor: pointer;
+}
