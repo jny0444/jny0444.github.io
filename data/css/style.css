@@ -17,18 +17,25 @@ a{
     color: black;
 }
 
-.header{
+.header-container{
     display: flex;
     justify-content: space-between;
-    background: rgba(255, 255, 0, 0.283);
-    padding: 10px 16px;
+    background: rgb(252, 255, 95);
     
+}
+
+.content{
+    padding: 16px;
 }
 
 .sticky{
     position: fixed;
     top: 0;
     width: 100%;
+}
+
+.sticky + .content{
+    padding-top: 102px;
 }
 
 .logo{
@@ -79,3 +86,4 @@ a{
     background-color: rgba(255, 255, 0, 0);
     cursor: pointer;
 }
+
