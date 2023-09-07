@@ -24,20 +24,6 @@ a{
     
 }
 
-.content{
-    padding: 16px;
-}
-
-.sticky{
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-.sticky + .content{
-    padding-top: 102px;
-}
-
 .logo{
     display: flex;
     justify-content: space-between;
@@ -59,8 +45,9 @@ a{
     font-size: 20px;
     color: rgb(96, 55, 55);
     margin-left: 5px;
-    padding-bottom: 10px;
-    margin-top: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
 }
 
 .head-list{
