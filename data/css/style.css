@@ -74,31 +74,10 @@ a{
     cursor: pointer;
 }
 
-.dropdown{
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content{
-    display: none;
-    position: absolute;
-    background-color: antiquewhite;
-    min-width: 100px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content .dropdown-li{
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content .dropdown-li:hover{
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content{
-    display: block;
+.foooter{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
 }
