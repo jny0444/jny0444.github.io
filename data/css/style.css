@@ -1,10 +1,24 @@
 /* STYLE.CSS */
 
+/* Use font 
+1. child's handwriting
+2. unrulyness */
+
 @font-face {
     font-family: 'Albus';
     src: url('../fonts/Albus.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Child';
+    src: url('../fonts/ChildsHandwriting-8AX2.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Unruly';
+    src: url('../fonts/Unrulyness-aGga.ttf') format('truetype');
+}
+
 body {
-    color
+    background-color: rgb(243, 238, 227);
 }
