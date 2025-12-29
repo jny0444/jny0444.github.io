@@ -20,11 +20,6 @@ body {
 
 .sym {
     color: #99E1D9;
-    transition: all 0.2s;
-}
-
-.sym:hover {
-    transform: rotate(1deg);
 }
 
 .lang {
