@@ -13,12 +13,70 @@ body {
     width: 90%;
     margin: auto;
     position: relative;
-    background-color: #000000;
+    background-color: #030613;
     color: #F0F7F4;
 }
 
-.heading {
-    flex: auto;
+.sym {
+    color: #99E1D9;
+    transition: all 0.2s;
+}
+
+.sym:hover {
+    transform: rotate(1deg);
+}
+
+.lang {
+    text-decoration: underline;
+    text-decoration-color: #99E1D9;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.lang::after {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1.5em;
+    white-space: nowrap;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.lang:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.lang[data-lang="rust"]::after {
+    content: "\f1617";
+}
+
+.lang[data-lang="solidity"]::after {
+    content: "\e8a6";
+}
+
+.lang[data-lang="go"]::after {
+    content: "\e626";
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 5%;
+}
+
+.list {
+    height: auto;
 }
 
 a {
@@ -31,12 +89,48 @@ a:hover {
     color: #99E1D9;
 }
 
-footer {
+footer p {
     font-size:x-small;
 }
 
-video {
+.div-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* video {
     width: 100%;
-    height: auto;
-    display: block;
+    height: 30px;
+} */
+
+li::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #99E1D9;
+    top: 0.5rem;
+    left: -21px;
+    transition: all 0.2s;
+    border-radius: 50%;
+}
+
+li {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+li:has(a:hover)::before, 
+.logo:hover, 
+body:has(.logo:hover) li::before {
+    border-radius: 0%;
+}
+
+li:has(a:active)::before, 
+.logo:active,
+body:has(.logo:active) li::before {
+    background: #f43841;
+    border-radius: 0%;
+    transform: rotate(45deg);
 }
