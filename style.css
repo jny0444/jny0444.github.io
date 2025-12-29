@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Iosevka';
+    src: url('/fonts/IosevkaNerdFontMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+}
+
+* {
+    font-family: 'Iosevka', monospace;
+}
+
+body {
+    max-width: 480px;
+    width: 90%;
+    margin: auto;
+    position: relative;
+    background-color: #000000;
+    color: #F0F7F4;
+}
+
+.heading {
+    flex: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #99E1D9;
+}
+
+footer {
+    font-size:x-small;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
