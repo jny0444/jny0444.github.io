@@ -15,6 +15,7 @@ body {
     position: relative;
     background-color: #030613;
     color: #F0F7F4;
+    margin-top: 20px;
 }
 
 .sym {
@@ -80,8 +81,9 @@ ul {
 }
 
 a {
-    text-decoration: none;
-    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: #99E1D9;
+    color: #F0F7F4;
 }
 
 a:hover {
@@ -98,11 +100,6 @@ footer p {
     justify-content: space-between;
     align-items: center;
 }
-
-/* video {
-    width: 100%;
-    height: 30px;
-} */
 
 li::before {
     content: "";
@@ -133,4 +130,9 @@ body:has(.logo:active) li::before {
     background: #f43841;
     border-radius: 0%;
     transform: rotate(45deg);
+}
+
+.resume {
+    text-decoration: underline;
+    text-decoration-color: #99E1D9;
 }
