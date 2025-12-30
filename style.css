@@ -12,6 +12,7 @@
 
 * {
   font-family: "Iosevka", monospace;
+  line-height: 22px;
 }
 
 body {
@@ -130,4 +131,29 @@ body:has(.logo:active) li::before {
   background: #f43841;
   border-radius: 0%;
   transform: rotate(45deg);
+}
+
+pre {
+  background: #161a2f;
+  border: 1px solid #99e1d9;
+  padding: 10px;
+  overflow-x: auto;
+  border-radius: 4px;
+}
+
+.back {
+  color: var(--accent-color);
+}
+
+code {
+    background-color: #161a2f;
+    padding: 2px 4px;
+    border: 1px solid #99e1d9;
+    border-radius: 4px;
+}
+
+pre code {
+    border: none;
+    padding: 0;
+    background-color: transparent;
 }

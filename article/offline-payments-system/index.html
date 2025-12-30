@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+    <link rel="stylesheet" href="../../style.css" />
+    <title>jny0444</title>
+  </head>
+  <body>
+    <h3><a href="/index.html" class="back">← Go back</a></h3>
+    <header>
+      <h1><span class="sym">❯</span> Offline Payments System</h1>
+    </header>
+
+    <p>
+      I tried creating an offline payments system in Rust inspired by Bitcoin's
+      Lightning Network.
+    </p>
+
+    <ul>
+      <li>
+        <h3>
+          <a href="#what-is-lightning-network">What is Lightning Network?</a>
+        </h3>
+      </li>
+    </ul>
+
+    <p>
+      Lightning Network is a Bitcoin L2 where users can do off-chain
+      transactions and later settle it on-chain.
+    </p>
+    <p>
+      In this, two parties open a payment channel by locking funds in a
+      multi-signature address. They transact off-chain by exchanging signed
+      balance updates, broadcasting only the final state to the blockchain.
+    </p>
+    <p>
+      This enables instant, low-cost transactions without waiting for on-chain
+      confirmations.
+    </p>
+
+    <pre>
+      <code>
+
+┌────────────────┐    ┌───────────────────┐    ┌────────────────┐
+│    On-chain    │&lt;--&gt;│  Payment Channel  │&lt;--&gt;│    On-chain    │
+│   Funding Tx   │    │ (2-of-2 multisig) │    │   Closing Tx   │
+└────────────────┘    └───────────────────┘    └────────────────┘
+      </code>
+    </pre>
+
+    <p>
+      You can read more about Lightning Network
+      <a href="https://lightning.network/">here</a>.
+    </p>
+
+    <ul>
+      <li>
+        <h3><a href="#my-implementation">My Implementation</a></h3>
+      </li>
+    </ul>
+
+    <p>
+      I made something similar to how Lightning Network works in Rust. You can
+      go through the repository
+      <a href="https://github.com/jny0444/offline-pwa">here</a>. It still lacks
+      a proper frontend, but you can try out the backend and the core contract
+      logic.
+    </p>
+    <p>There are three main directories in the repo:</p>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/jny0444/offline-pwa/tree/main/client"
+          target="_blank"
+          >Client</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/jny0444/offline-pwa/tree/main/contract"
+          target="_blank"
+          >Contract</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/jny0444/offline-pwa/tree/main/server"
+          target="_blank"
+          >Server</a
+        >
+      </li>
+    </ul>
+
+    <p>The core logic of the app lies in <code>contract</code> directory.</p>
+
+    <footer>
+      <div class="div-footer">
+        <p>© <span id="year"></span> Jnyandeep Singh</p>
+      </div>
+    </footer>
+    <script src="../../script.js"></script>
+  </body>
+</html>
