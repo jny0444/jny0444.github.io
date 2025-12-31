@@ -1,3 +1,6 @@
+/* =========================================
+   1. Variables & Fonts
+   ========================================= */
 @font-face {
   font-family: "Iosevka";
   src: url("/fonts/IosevkaNerdFontMono-Regular.ttf") format("truetype");
@@ -10,9 +13,11 @@
   --accent-color: #99e1d9;
 }
 
+/* =========================================
+   2. Global Resets & Base Styles
+   ========================================= */
 * {
   font-family: "Iosevka", monospace;
-  line-height: 22px;
 }
 
 body {
@@ -23,12 +28,83 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   margin-top: 20px;
+
+  text-underline-offset: 3px;
 }
 
+a {
+  text-decoration: underline;
+  text-decoration-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 5%;
+}
+
+li {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+/* Default list bullet style */
+li::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-color);
+  top: 0.5rem;
+  left: -21px;
+  transition: all 0.2s;
+  border-radius: 50%;
+}
+
+/* Interactive list item styles */
+li:has(a:hover)::before,
+.logo:hover,
+body:has(.logo:hover) li::before {
+  border-radius: 0%;
+}
+
+li:has(a:active)::before,
+.logo:active,
+body:has(.logo:active) li::before {
+  background: #f43841;
+  border-radius: 0%;
+  transform: rotate(45deg);
+}
+
+.list {
+  height: auto;
+}
+
+/* =========================================
+   3. Typography & Text Utilities
+   ========================================= */
 .sym {
   color: var(--accent-color);
 }
 
+.back {
+  color: var(--accent-color);
+}
+
+footer p {
+  font-size: x-small;
+}
+
+/* =========================================
+   4. Components
+   ========================================= */
+
+/* --- Language Tooltips --- */
 .lang {
   position: relative;
   cursor: pointer;
@@ -72,67 +148,14 @@ body {
   content: "\e626";
 }
 
-ul {
-  list-style-type: none;
-  padding-left: 5%;
-}
-
-.list {
-  height: auto;
-}
-
-a {
-  text-decoration: underline;
-  text-decoration-color: var(--accent-color);
-  color: var(--text-color);
-}
-
-a:hover {
-  text-decoration: underline;
-  color: var(--accent-color);
-}
-
-footer p {
-  font-size: x-small;
-}
-
+/* --- Footer --- */
 .div-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-li::before {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: var(--accent-color);
-  top: 0.5rem;
-  left: -21px;
-  transition: all 0.2s;
-  border-radius: 50%;
-}
-
-li {
-  position: relative;
-  margin-bottom: 10px;
-}
-
-li:has(a:hover)::before,
-.logo:hover,
-body:has(.logo:hover) li::before {
-  border-radius: 0%;
-}
-
-li:has(a:active)::before,
-.logo:active,
-body:has(.logo:active) li::before {
-  background: #f43841;
-  border-radius: 0%;
-  transform: rotate(45deg);
-}
-
+/* --- Code Blocks --- */
 pre {
   background: #161a2f;
   border: 1px solid #99e1d9;
@@ -141,19 +164,104 @@ pre {
   border-radius: 4px;
 }
 
-.back {
-  color: var(--accent-color);
-}
-
 code {
-    background-color: #161a2f;
-    padding: 2px 4px;
-    border: 1px solid #99e1d9;
-    border-radius: 4px;
+  background-color: #161a2f;
+  padding: 1px 4px;
+  border: 1px solid #99e1d9;
+  border-radius: 4px;
+  font-size: 0.8em;
 }
 
 pre code {
-    border: none;
-    padding: 0;
-    background-color: transparent;
+  border: none;
+  background-color: transparent;
+}
+
+.token {
+  color: var(--accent-color);
+}
+
+/* --- File Tree --- */
+.file-tree {
+  padding-left: 10px;
+  font-family: "Iosevka", monospace;
+}
+
+.file-tree ul {
+  padding-left: 20px;
+  border-left: 1px solid var(--accent-color);
+  margin-left: 5px;
+}
+
+.file-tree li {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 5px;
+}
+
+/* Override the default circle bullet for file tree */
+.file-tree li::before {
+  content: "";
+  position: absolute;
+  top: 0.7em;
+  left: -21px; /* Align with the border */
+  width: 15px;
+  height: 1px;
+  background-color: var(--accent-color);
+  border-radius: 0;
+}
+
+.file-tree > li::before {
+  display: none; /* No line for root */
+}
+
+.file-tree > li {
+  padding-left: 0;
+}
+
+.folder-icon::before {
+  content: "\e5fe"; /* Nerd Font folder icon */
+  margin-right: 5px;
+  color: var(--accent-color);
+}
+
+.file-icon::before {
+  content: "\f15b"; /* Nerd Font file icon */
+  margin-right: 5px;
+  color: var(--accent-color);
+}
+
+/* --- Mermaid Diagrams --- */
+.mermaid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.messageText {
+  fill: var(--accent-color) !important;
+  stroke: none;
+}
+
+.labelText {
+  fill: var(--accent-color) !important;
+  stroke: none;
+}
+
+.messageLine0,
+.messageLine1 {
+  stroke: var(--accent-color) !important;
+}
+
+#arrowhead path,
+.arrowheadPath {
+  fill: var(--accent-color) !important;
+  stroke: var(--accent-color) !important;
+}
+
+/* --- Highlight.js Overrides --- */
+.hljs {
+  background: #161a2f !important;
+  color: var(--text-color) !important;
+  padding: 0 !important;
 }

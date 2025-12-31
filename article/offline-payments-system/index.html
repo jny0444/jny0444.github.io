@@ -6,6 +6,19 @@
     <link rel="icon" type="image/x-icon" href="../../favicon.ico" />
     <link rel="stylesheet" href="../../style.css" />
     <title>jny0444</title>
+
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+      hljs.highlightAll();
+    </script>
   </head>
   <body>
     <h3><a href="/index.html" class="back">← Go back</a></h3>
@@ -40,14 +53,13 @@
       confirmations.
     </p>
 
-    <pre>
-      <code>
-
-┌────────────────┐    ┌───────────────────┐    ┌────────────────┐
-│    On-chain    │&lt;--&gt;│  Payment Channel  │&lt;--&gt;│    On-chain    │
-│   Funding Tx   │    │ (2-of-2 multisig) │    │   Closing Tx   │
-└────────────────┘    └───────────────────┘    └────────────────┘
-      </code>
+    <pre class="mermaid">
+      sequenceDiagram
+        participant On-chain Funding Tx
+        participant Payment@{ "type" : "queue" }
+        participant On-chain Closing Tx
+        On-chain Funding Tx--&gt;Payment: Open Channel
+        Payment--&gt;On-chain Closing Tx: Close Channel
     </pre>
 
     <p>
@@ -94,6 +106,100 @@
     </ul>
 
     <p>The core logic of the app lies in <code>contract</code> directory.</p>
+
+    <ul>
+      <li>
+        <h3>
+          <a href="#logic-impl">Logic Implementation of the Backend/Server</a>
+        </h3>
+      </li>
+    </ul>
+
+    <p>
+      The main thing used in this is <code>alloy</code> crate. It helps you
+      interact with blockchain in Rust.
+    </p>
+    <p>
+      <code>/server/src/contracts</code> has all of the code required to
+      interact with the smart contracts.
+    </p>
+
+    <p>
+      When users register to the platform, a new custodial wallet is created and
+      its private key is stored securely. Users need to first add some money as
+      collateral for security, which wouldn't be shown as balance. Users can
+      then add money to their balance.
+    </p>
+
+    <pre class="mermaid">
+      sequenceDiagram
+        participant User
+        participant Server
+        participant Blockchain
+        User-&gt;&gt;Server: Register &amp; Deposit Collateral
+        activate Server
+        Server-&gt;&gt;Blockchain: Create Wallet &amp; Deposit Collateral Tx
+        deactivate Server
+        Server-&gt;&gt;User: Registration Successful
+        User-&gt;&gt;Server: Add Funds to Balance
+        activate Server
+        Server-&gt;&gt;Blockchain: Deposit Funds Tx
+        deactivate Server
+        Server-&gt;&gt;User: Balance Updated
+        User-&gt;&gt;Server: Initiate Payment to Another User
+        activate Server
+        Server-&gt;&gt;Blockchain: Create Payment Channel Tx
+        deactivate Server
+        Server-&gt;&gt;User: Payment Channel Established
+        User-&gt;&gt;Server: Close Payment Channel
+        activate Server
+        Server-&gt;&gt;Blockchain: Settle Final Balance Tx
+        deactivate Server
+    </pre>
+
+    <p>
+      The users perform transactions by using the ERC-20 token
+      <code class="token">$OFFPAY</code>. Users perform transactions off-chain
+      and start a settlement period for 1 day or so. The payment has to be
+      settle during that time by sending the final amount on-chain. If not, the
+      amount will be slashed from their collateral.
+    </p>
+
+    <p>
+      The main function responsible for settlement of payments is
+      <code>call_settle_payment</code>
+    </p>
+    <pre><code class="language-rust">pub async fn call_settle_payment(
+    transaction: &Transaction,
+    wallet: &Wallet,
+    to: Address,
+    amount: U256,
+) -> Result<()> {
+    let (contract_address, provider) = init_provider_with_wallet(wallet).await?;
+
+    let (contract, _) = init_contracts(&provider, contract_address).await?;
+
+    let current_timestamp = U256::from(Utc::now().timestamp() as u64);
+
+    let settle_time_period_in_seconds = U256::from(Duration::days(1).num_seconds() as u64);
+
+    let elapsed_time = current_timestamp.saturating_sub(transaction.timestamp);
+
+    if elapsed_time <= settle_time_period_in_seconds {
+        let settle_payment_tx = contract.settlePayment(to, amount).send().await?;
+        let _receipt = settle_payment_tx.get_receipt().await?;
+    } else {
+        let settle_payment_after_settlement_time_tx = contract
+            .settlePaymentAfterSettlementPeriod(to, amount)
+            .send()
+            .await?;
+        let _receipt = settle_payment_after_settlement_time_tx
+            .get_receipt()
+            .await?;
+    }
+
+    Ok(())
+}</code></pre>
 
     <footer>
       <div class="div-footer">
