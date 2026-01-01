@@ -11,6 +11,7 @@
   --bg-color: #030613;
   --text-color: #f0f7f4;
   --accent-color: #99e1d9;
+  --code-bg: #161a2f;
 }
 
 /* =========================================
@@ -156,19 +157,20 @@ footer p {
 }
 
 /* --- Code Blocks --- */
-pre {
-  background: #161a2f;
-  border: 1px solid #99e1d9;
-  padding: 10px;
-  overflow-x: auto;
+pre,
+code {
+  background-color: var(--code-bg);
+  border: 1px solid var(--accent-color);
   border-radius: 4px;
 }
 
+pre {
+  padding: 10px;
+  overflow-x: auto;
+}
+
 code {
-  background-color: #161a2f;
   padding: 1px 4px;
-  border: 1px solid #99e1d9;
-  border-radius: 4px;
   font-size: 0.8em;
 }
 
@@ -238,11 +240,7 @@ pre code {
   justify-content: center;
 }
 
-.messageText {
-  fill: var(--accent-color) !important;
-  stroke: none;
-}
-
+.messageText,
 .labelText {
   fill: var(--accent-color) !important;
   stroke: none;
@@ -261,7 +259,7 @@ pre code {
 
 /* --- Highlight.js Overrides --- */
 .hljs {
-  background: #161a2f !important;
+  background: var(--code-bg) !important;
   color: var(--text-color) !important;
   padding: 0 !important;
 }

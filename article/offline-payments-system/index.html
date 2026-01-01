@@ -167,9 +167,18 @@
 
     <p>
       The main function responsible for settlement of payments is
-      <code>call_settle_payment</code>
+      <code>call_settle_payment</code>.
     </p>
-    <pre><code class="language-rust">pub async fn call_settle_payment(
+    <pre><code>use alloy::primitives::{Address, U256};
+use chrono::{Duration, Utc};
+use eyre::{Ok, Result};
+
+use crate::{
+    contracts::init::{init_contracts, init_provider_with_wallet},
+    models::model::{Transaction, Wallet},
+};
+
+pub async fn call_settle_payment(
     transaction: &Transaction,
     wallet: &Wallet,
     to: Address,
@@ -200,6 +209,121 @@
 
     Ok(())
 }</code></pre>
+
+    <p>The type of object which this function will accept is of this format.</p>
+    <pre><code>{
+    "wallet": {
+        "public_key": "0x8b4754842db66d1e31d166eb96cadb700dc2f3a4",
+        "private_key": "0xe3dd13d6098228249925315caf3abca462a6edf1696b8d61b379906ff1353926"
+    },
+    "transaction": {
+        "id": "1",
+        "from": "0x8b4754842db66d1e31d166eb96cadb700dc2f3a4",
+        "to": "0x1f41edf961bf379e0c10c9e5c94361b769806898",
+        "amount": "100000000000000000",
+        "timestamp": "1753807570",
+        "is_settled": false,
+        "tx_hash": "1f41edf961bf379e0c10c9e5c94361b769806898"
+    },
+    "amount": "100000000000000000"
+}</code></pre>
+
+    <p>
+      You can read more about the models in <code>/server/src/models</code>,
+      which contain information about how the data object format is defined.
+    </p>
+
+    <ul>
+      <li>
+        <h3>
+          <a href="#contract-impl">Smart Contract Implementation</a>
+        </h3>
+      </li>
+    </ul>
+
+    <p>The contract implementation is rather simple compared to the backend.</p>
+
+    <p>
+      There are only 2 contracts which handle the payment channels and
+      settlements.
+    </p>
+
+    <ul>
+      <li>
+        <a
+          href="https://github.com/jny0444/offline-pwa/blob/main/contract/src/OffPay.sol"
+          >OffPay.sol</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/jny0444/offline-pwa/blob/main/contract/src/OffPayToken.sol"
+          >OffPayToken.sol</a
+        >
+      </li>
+    </ul>
+
+    <p>
+      <code>OffPayToken.sol</code> is a simple ERC-20 token contract. The main
+      logic is in <code>OffPay.sol</code>.
+    </p>
+
+    <pre><code>function settlePayment(address recipient, uint256 amount) external {
+    User storage sender = users[msg.sender];
+    User storage recip = users[recipient];
+    require(sender.isRegistered, "Not registered");
+    require(recip.isRegistered, "Recipient not registered");
+    require(amount > 0, "Amount must be > 0");
+    require(block.timestamp <= sender.last_txn_timestamp + SETTLEMENT_PERIOD, "Not within settlement period");
+    require(sender.balance >= amount, "Insufficient balance");
+
+    sender.balance -= amount;
+    sender.last_txn_timestamp = block.timestamp;
+
+    require(token.transfer(recipient, amount), "Token transfer failed");
+    emit PaymentSettled(msg.sender, recipient, amount, false, block.timestamp);
+}
+
+function settlePaymentAfterSettlementPeriod(address recipient, uint256 amount) external {
+    User storage sender = users[msg.sender];
+    User storage recip = users[recipient];
+    require(sender.isRegistered, "Not registered");
+    require(recip.isRegistered, "Recipient not registered");
+    require(amount > 0, "Amount must be > 0");
+    require(block.timestamp > sender.last_txn_timestamp + SETTLEMENT_PERIOD, "Settlement period not yet over");
+    require(sender.collateral - amount >= HEALTHY_COLLATERAL, "Collateral would fall below healthy threshold");
+    sender.collateral -= amount;
+    sender.last_txn_timestamp = block.timestamp;
+
+    require(token.transfer(recipient, amount), "Token transfer failed");
+    emit PaymentSettled(msg.sender, recipient, amount, true, block.timestamp);
+}</code></pre>
+
+    <p>
+      The two functions <code>settlePayment</code> and
+      <code>settlePaymentAfterSettlementPeriod</code> handle the settlement of
+      payments within and after the settlement period respectively.
+    </p>
+
+    <ul>
+      <li>
+        <h3><a href="#conclusion">Conclusion</a></h3>
+      </li>
+    </ul>
+
+    <p>
+      This is the basic structure of the offline payments system using smart
+      contracts and ERC-20 tokens.
+    </p>
+
+    <p>
+      I have further plans of making this into a full-fledged protocol with a
+      proper frontend, preferably a mobile app. There are many flaws in this
+      approach I took, such as privacy and security, such as you cannot decide
+      if the payment actually took place on-chain and many other such issues,
+      which will be solved in a better and improved version of this in near
+      future.
+    </p>
 
     <footer>
       <div class="div-footer">
