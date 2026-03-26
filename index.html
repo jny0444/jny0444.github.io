@@ -1,68 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="style.css" />
-    <title>jny0444</title>
+    <title>jny0444's portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.ico" />
+    <script src="script.js" defer></script>
   </head>
-
   <body>
-    <header>
-      <h1><span class="sym">❯</span> jny0444</h1>
-    </header>
-    <p>
-      Hi! I am Jnyandeep Singh. I am a programmer interested in web3
-      technologies.
-    </p>
-    <p>
-      I write code in <a class="lang" data-lang="rust">Rust</a>,
-      <a class="lang" data-lang="solidity">Solidity</a>,
-      <a class="lang" data-lang="go">Go</a> and have interest in cryptography
-      and try to make infra for blockchain.
-    </p>
+    <main class="layout">
+      <aside class="image-panel" aria-hidden="true"></aside>
 
-    <h3>You can find me on</h3>
-    <ul>
-      <li>
-        <a href="https://x.com/jny0444" target="_blank">X.com/jny0444</a>
-      </li>
-      <li>
-        <a href="https://github.com/jny0444" target="_blank"
-          >GitHub.com/jny0444</a
-        >
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/in/jnyandeep-singh/" target="_blank"
-          >LinkedIn.com/in/jnyandeep-singh</a
-        >
-      </li>
-      <li>
-        <a href="mailto:thokchom.jnyandeep@gmail.com" target="_blank"
-          >Thokchom.jnyandeep@gmail.com</a
-        >
-      </li>
-    </ul>
+      <section class="content-panel">
+        <div class="content-inner">
+          <div class="title-row">
+            <h1><i>jny0444</i></h1>
+          </div>
+          <p>
+            Hi, I am Jnyandeep Singh, a CS student passionate about developing
+            applications around Web3.
+          </p>
+          <p>
+            I have experience writing code in Rust, Go, Solidity, TypeScript and
+            Python. I am focused on building backend/systems design and have a
+            strong interest in distributed systems, blockchain and cryptography.
+          </p>
+          <h4>You can find me on:</h4>
+          <ul>
+            <li>
+              <a href="https://x.com/jny0444" target="_blank"
+                >X (formerly Twitter)</a
+              >
+            </li>
+            <li>
+              <a href="https://github.com/jny0444" target="_blank">GitHub</a>
+            </li>
+          </ul>
 
-    <p>
-      You can take a look at my resume
-      <a href="/public/latest_resume.pdf" target="_blank">here</a>.
-    </p>
+          <h3>Projects</h3>
+          <ul>
+            <li>
+              <b>Intent-Swaps</b>: Built an intent-based swap system on a local
+              Arbitrum fork where solvers discover and fulfill signed user
+              intents. Used EIP-712 typed-data signatures for secure off-chain
+              message signing and on-chain verification.
+              <img
+                src="./assets/projects/intent-swap.png"
+                alt="A screenshot of the intent-swaps project"
+                class="project-image"
+              /><br />
+              <a href="https://github.com/jny0444/intent-swaps" target="_blank"
+                >GitHub repo</a
+              >
+            </li>
+            <li>
+              <b>Rotor</b>: An privacy focused payments protocol built on
+              Stellar which uses commitment schemes for private transactions.
+              Used Noir for writing the circuits and UltraHonk proving scheme
+              for proving in a fast and effective way.
+              <img
+                src="./assets/projects/rotor.png"
+                alt="A screenshot of the rotor project"
+                class="project-image"
+              /><br />
+              <a href="https://github.com/jny0444/rotor" target="_blank"
+                >GitHub repo</a
+              >
+            </li>
+            <li>
+              <b>BOO</b>: Bitcoin Optimistic Oracle, an Optimistic Oracle system
+              built on Stellar to provide off-chain data, on-chain. Implemented
+              an architecture to provide incentive to data providers with a
+              slash-and-reward mechanism
+              <img
+                src="./assets/projects/boo.png"
+                alt="A screenshot of the boo project"
+                class="project-image"
+              /><br />
+              <a href="https://github.com/jny0444/boo" target="_blank"
+                >GitHub repo</a
+              >
+            </li>
+          </ul>
+          <p>
+            You can find more projects on my
+            <a href="https://github.com/jny0444" target="_blank">GitHub</a>.
+          </p>
+        </div>
+      </section>
+    </main>
 
-    <h3>Here are some of my notes/articles I wrote</h3>
-
-    <ul>
-      <li>
-        <a href="/article/offline-payments-system/">Offline Payments System</a>
-      </li>
-    </ul>
-
-    <footer>
-      <div class="div-footer">
-        <p>© <span id="year"></span> Jnyandeep Singh</p>
+    <div class="image-preview" id="imagePreview" aria-hidden="true">
+      <div
+        class="image-preview-content"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Project image preview"
+      >
+        <img id="imagePreviewImg" alt="" />
       </div>
-    </footer>
-    <script src="script.js"></script>
+    </div>
   </body>
 </html>
