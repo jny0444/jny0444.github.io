@@ -4,13 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>jny0444's portfolio</title>
+    <meta name="description" content="Portfolio" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data: https:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self';"
+    />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/bg-1400.webp"
+      imagesrcset="assets/bg-800.webp 800w, assets/bg-1400.webp 1400w, assets/bg-2200.webp 2200w"
+      imagesizes="(max-width: 900px) 100vw, 60vw"
+      fetchpriority="high"
+    />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <script src="script.js" defer></script>
   </head>
   <body>
     <main class="layout">
-      <aside class="image-panel" aria-hidden="true"></aside>
+      <aside class="image-panel" aria-hidden="true">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="
+              assets/bg-800.webp   800w,
+              assets/bg-1400.webp 1400w,
+              assets/bg-2200.webp 2200w
+            "
+            sizes="(max-width: 900px) 100vw, 60vw"
+          />
+          <source
+            srcset="
+              assets/bg-800.jpg   800w,
+              assets/bg-1400.jpg 1400w,
+              assets/bg-2200.jpg 2200w
+            "
+            sizes="(max-width: 900px) 100vw, 60vw"
+          />
+          <img
+            src="assets/bg-1400.webp"
+            srcset="
+              assets/bg-800.webp   800w,
+              assets/bg-1400.webp 1400w,
+              assets/bg-2200.webp 2200w
+            "
+            sizes="(max-width: 900px) 100vw, 60vw"
+            alt=""
+            width="1400"
+            height="1400"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+      </aside>
 
       <section class="content-panel">
         <div class="content-inner">
@@ -26,10 +74,25 @@
             Python. I am focused on building systems and have a strong interest
             in distributed systems, blockchain and cryptography.
           </p>
-          <h4>You can find me on:</h4>
-          <a href="https://x.com/jny0444" target="_blank">X</a>
-          <br />
-          <a href="https://github.com/jny0444" target="_blank">GitHub</a>
+          <p>You can find me on:</p>
+          <ul>
+            <li>
+              <a
+                href="https://x.com/jny0444"
+                target="_blank"
+                rel="noopener noreferrer"
+                >X</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/jny0444"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub</a
+              >
+            </li>
+          </ul>
 
           <p>
             You can contact me at
@@ -42,57 +105,85 @@
           <hr />
           <ul>
             <li>
+              <b>Camel</b>: It is the improved version of the existing offline
+              payments protocol I made. Camel uses 4-way handshakes using QR
+              codes to create State Channels and stores them locally in
+              indexedDB.
+              <a
+                href="https://github.com/jny0444/camel"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub repo</a
+              >
+            </li>
+            <li>
               <b>EVM-PMPC</b>: I am still working on this project, its a
               protocol I am building from scratch to enable private multi-party
               computation on data in EVM chains. It can be used for private
               DeFi, private prediction markets and more.
-              <a href="https://github.com/evm-pmpc" target="_blank"
+              <a
+                href="https://github.com/evm-pmpc"
+                target="_blank"
+                rel="noopener noreferrer"
                 >GitHub repo</a
               >
             </li>
-            <br />
             <li>
               <b>Intent-Swaps</b>: Built an intent-based swap system on a local
               Arbitrum fork where solvers discover and fulfill signed user
               intents. Used EIP-712 typed-data signatures for secure off-chain
               message signing and on-chain verification.
-              <a href="https://github.com/jny0444/intent-swaps" target="_blank"
+              <a
+                href="https://github.com/jny0444/intent-swaps"
+                target="_blank"
+                rel="noopener noreferrer"
                 >GitHub repo</a
               >
             </li>
-            <br />
             <li>
               <b>Rotor</b>: An privacy focused payments protocol built on
               Stellar which uses commitment schemes for private transactions.
               Used Noir for writing the circuits and UltraHonk proving scheme
               for proving in a fast and effective way.
-              <a href="https://github.com/jny0444/rotor" target="_blank"
+              <a
+                href="https://github.com/jny0444/rotor"
+                target="_blank"
+                rel="noopener noreferrer"
                 >GitHub repo</a
               >
             </li>
-            <br />
             <li>
               <b>BOO</b>: Bitcoin Optimistic Oracle, an Optimistic Oracle system
               built on Stellar to provide off-chain data, on-chain. Implemented
               an architecture to provide incentive to data providers with a
               slash-and-reward mechanism
-              <a href="https://github.com/jny0444/boo" target="_blank"
+              <a
+                href="https://github.com/jny0444/boo"
+                target="_blank"
+                rel="noopener noreferrer"
                 >GitHub repo</a
               >
             </li>
-            <br />
             <li>
               <b>Offline Payments</b>: A system to perform offline payments
               using QR codes and setting up trustlines between users. Used alloy
               to implement the backend in Rust.
-              <a href="https://github.com/jny0444/offline-pwa" target="_blank"
+              <a
+                href="https://github.com/jny0444/offline-pwa"
+                target="_blank"
+                rel="noopener noreferrer"
                 >GitHub repo</a
               >
             </li>
           </ul>
           <p>
             You can find more projects on my
-            <a href="https://github.com/jny0444" target="_blank">GitHub</a>.
+            <a
+              href="https://github.com/jny0444"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub</a
+            >.
           </p>
 
           <h3>Misc</h3>
@@ -120,7 +211,7 @@
         aria-modal="true"
         aria-label="Project image preview"
       >
-        <img id="imagePreviewImg" alt="" />
+        <img id="imagePreviewImg" alt="" width="980" height="680" />
       </div>
     </div>
   </body>
