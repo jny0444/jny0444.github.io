@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "IBM Plex Mono";
+  src:
+    url("assets/IBMPlexMono-Regular.woff2") format("woff2"),
+    url("assets/IBMPlexMono-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 html,
 body {
   margin: 0;
@@ -11,7 +21,7 @@ body {
 
 body {
   overflow: hidden;
-  font-family: monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .layout {
